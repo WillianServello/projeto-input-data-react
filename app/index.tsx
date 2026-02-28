@@ -2,15 +2,34 @@ import { useEffect, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
-  const [count, setCount] = useState(0);
+  
+  const [count, setCount] = useState(1); 
   const [signal, setSignal] = useState(false);
   const [array, setArray] = useState<number[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const [inputList, setInputList] = useState<string[]>([]);
+
+  //     chamando por contador e a setContador seria minha variavél para atribuir valor
+  const [contador, setContador] = useState(1); // isso daqui é pra conseguir contar
+  const [inputValue, setInputValue] = useState("");  
+  const [inputList, setInputList] = useState<{}[]>([]);
+
+
+  const agora = new Date();
+  const novoItem = {
+    Id: contador,
+    Tarefa: inputValue,
+    Data: agora.toLocaleString(),
+    GOW: "DESTUA O TEMPLOS DE ATENAS",
+  };
+
   function appendInput() {
-    setInputList([...inputList, inputValue]);
-    setInputValue("");
-  }
+  
+
+  setInputList([...inputList, novoItem]);
+  setContador(contador + 1)
+  setInputValue("");
+}
+
+
 
   function changeSignal() {
     setSignal(!signal);
