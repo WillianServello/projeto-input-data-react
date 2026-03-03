@@ -2,7 +2,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { Link } from "expo-router";
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 
 export default function Earless() {
@@ -44,53 +44,56 @@ export default function Earless() {
 
     return (
         <View style={styles.background}>
+            <ScrollView style={styles.conteinerScroll}>
 
-            <View style={styles.conteinerPrincipal} >
+            
+                <View style={styles.conteinerPrincipal} >
 
-                <View style={styles.conteiterConteudoCenter}>
-                    
-
-                    <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
-                        {/*CAIXA DO INPUT PARA RECEBER OS DADOS */}
-                        <TextInput value={valor} onChangeText={setarValor} 
-                        placeholder={ativoPlaceHolder ? "" : "Informe a Tarefa"} 
-
-                        //O focus faz com que o Placeholder desapareça quando eu clico nele
-                        onFocus={() => setAtivoPlaceHolder(true)}
-                        
-                        //O blur faz com que o Placeholder fique aparecendo quando eu não interajo com ele, então ele fica false
-                        onBlur={() => setAtivoPlaceHolder(false)}
-
-                        placeholderTextColor="#999" 
-                        style={styles.conteinerItensCenter}/>
+                    <View style={styles.conteiterConteudoCenter}>
                         
 
-                        {/*BOTÃO ADICIONAR PARA ENVIAR OS DADOS*/}
-                        <TouchableOpacity onPress={entrada} style={styles.boxAdicionar}>
-                            <Text style={{color: "white"}}>
-                                Adicionar Tarefa
-                            </Text>
-                        </TouchableOpacity>
-                    
-                    </View>
+                        <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", }}>
+                            {/*CAIXA DO INPUT PARA RECEBER OS DADOS */}
+                            <TextInput value={valor} onChangeText={setarValor} 
+                            placeholder={ativoPlaceHolder ? "" : "Informe a Tarefa"} 
 
-                    <View style={styles.conteinerTarefa}>
-                        
+                            //O focus faz com que o Placeholder desapareça quando eu clico nele
+                            onFocus={() => setAtivoPlaceHolder(true)}
                             
-                            {lista.map((item) => (
-                                <View style={styles.caixaTexto} key={item.Id}>
-                                    <Text style={styles.textoCor}>ID: {item.Id}</Text>
-                                    <Text style={styles.textoCor}>Titulo: {item.Titulo}</Text>
-                                    <Text style={styles.textoCor}>Data: {item.Data}</Text>
-                                    <Text style={styles.textoCor}>Horas: {item.Horas}</Text>
-                                </View>
-                            ))}
+                            //O blur faz com que o Placeholder fique aparecendo quando eu não interajo com ele, então ele fica false
+                            onBlur={() => setAtivoPlaceHolder(false)}
 
+                            placeholderTextColor="#999" 
+                            style={styles.conteinerItensCenter}/>
+                            
+
+                            {/*BOTÃO ADICIONAR PARA ENVIAR OS DADOS*/}
+                            <TouchableOpacity onPress={entrada} style={styles.boxAdicionar}>
+                                <Text style={{color: "white"}}>
+                                    Adicionar Tarefa
+                                </Text>
+                            </TouchableOpacity>
                         
-                    </View>
-                </View>
+                        </View>
 
-            </View>
+                        <View style={styles.conteinerTarefa}>
+                            
+                                
+                                {lista.map((item) => (
+                                    <View style={styles.caixaTexto} key={item.Id}>
+                                        <Text style={styles.textoCor}>ID: {item.Id}</Text>
+                                        <Text style={styles.textoCor}>Titulo: {item.Titulo}</Text>
+                                        <Text style={styles.textoCor}>Data: {item.Data}</Text>
+                                        <Text style={styles.textoCor}>Horas: {item.Horas}</Text>
+                                    </View>
+                                ))}
+
+                            
+                        </View>
+                    </View>
+
+                </View>
+            </ScrollView>
 
             {/* FOOTER BAR PARA REDIRECIONAMENTO DE PAGINAS */}
             <View style={styles.LinkContainer}>
@@ -120,13 +123,16 @@ const styles = StyleSheet.create({
       backgroundColor: "#1c2128",
     },
     conteinerPrincipal: {
+        
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "center"
     },
     conteinerItensCenter: {
-      width: 200,
+      width: 40,
       height: 40,
+      maxWidth: 100,
+      minWidth: 180,
       padding: 10,
       borderColor: "#444",
       borderWidth: 1,
@@ -135,12 +141,18 @@ const styles = StyleSheet.create({
       backgroundColor: "#282828",
       color: "white",
     },
-    
+
+    conteinerScroll: {
+      flexGrow: 1,
+    },
+
     conteiterConteudoCenter: {
         alignItems: "center", 
         justifyContent: "center",
         backgroundColor: "#282828",  
-        width: 500, borderRadius: 10, 
+        width: "100%", 
+        maxWidth: 500,
+        borderRadius: 10, 
         marginTop: 20, 
         padding: 20 
     },
@@ -179,6 +191,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       flexDirection: "row",
       backgroundColor: "#282828",
+      marginBottom: 25
       
       
     },
